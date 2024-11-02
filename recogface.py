@@ -6,7 +6,7 @@ def recogface():
     # Pasta onde as imagens dos usuários estão armazenadas
     path = 'imagens'
     imagens = []
-    nomes = []
+    cpfs = []
     meusArquivos = os.listdir(path)
 
     # Carregar e codificar imagens base
@@ -15,7 +15,7 @@ def recogface():
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         encode = fr.face_encodings(img)[0]
         imagens.append(encode)
-        nomes.append(os.path.splitext(arquivo)[0])
+        cpfs.append(os.path.splitext(arquivo)[0])
 
     # Inicializa a webcam
     webcam = cv2.VideoCapture(0)
@@ -44,8 +44,8 @@ def recogface():
             melhor_correspondencia = min(distancia)
             if melhor_correspondencia < 0.4:
                 melhor_indice = distancia.tolist().index(melhor_correspondencia)
-                nome = nomes[melhor_indice]
-                print("Bem-vindo,", nome)
+                CPF = cpfs[melhor_indice]
+                print("Bem-vindo,", CPF)
                 reconhecido = True
                 break
             else:
