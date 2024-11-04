@@ -4,7 +4,7 @@ import firebase_admin
 from firebase_admin import credentials, db
 
 # Autenticação Firebase 
-cred = credentials.Certificate('biometria-37217-firebase-adminsdk-c6dzv-048bc27293.json') 
+cred = credentials.Certificate('credenciais.json') 
 firebase_admin.initialize_app(cred, {
     'databaseURL': "https://biometria-37217-default-rtdb.firebaseio.com/"
     })
