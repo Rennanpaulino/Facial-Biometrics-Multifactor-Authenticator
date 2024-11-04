@@ -3,7 +3,7 @@ import face_recognition as fr
 import cadastro
 import numpy as np
 
-pessoa = cadastro.Pessoa("Rennan Paulino de Sousa", "51829747878", "rennanpsousa2003@gmail.com", "Test12345", 3)
+pessoa = cadastro.Pessoa("Rennan Paulino de Sousa", "51829747878", "rennanpsousa2003@gmail.com", "Test12345")
 
 # Função para converter o encode recuperado do Firebase
 def get_encoded_faces(pessoa): 
@@ -30,7 +30,6 @@ while not reconhecido:
     faceLocs = fr.face_locations(frame_rgb)
     for faceLoc in faceLocs:
         # Mostra o frame com a face detectada
-        cv2.imshow('Webcam', frame)
         encode = fr.face_encodings(frame_rgb, [faceLoc])[0]
 
         #recupera encode do banco de dados
@@ -40,15 +39,17 @@ while not reconhecido:
         comparacoes = fr.compare_faces(db_encodes, encode)
         distancia = fr.face_distance(db_encodes, encode)
 
-        if comparacoes:
-            if distancia < 0.4:
-                print(f"Bem-vindo, {pessoa.nome}!")
-                reconhecido = True
+        if any(comparacoes) and np.any(distancia < 0.4):
+            print(f"Bem-vindo, {pessoa.nome}!")
+            reconhecido = True
         else:
             cv2.putText(frame, "Desconhecido", (faceLoc[3], faceLoc[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
             cv2.rectangle(frame, (faceLoc[3], faceLoc[0]), (faceLoc[1], faceLoc[2]), (0, 0, 255), 2)
 
-    # Tecla 'esc' quebra o loop
+        #mostra a webcam
+        cv2.imshow('Webcam', frame)
+
+    # 'esc' quebra o loop
     if cv2.waitKey(1) & 0xFF == 27:
         break
 

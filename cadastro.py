@@ -11,12 +11,12 @@ firebase_admin.initialize_app(cred, {
     })
 
 class Pessoa:
-    def __init__(self, nome, cpf, email, password, access_level):
+    def __init__(self, nome, cpf, email, password):
         self.nome = nome
         self.cpf = cpf
         self.email = email
         self.password = password
-        self.access_level = access_level
+        self.access_level = 3
         self.encode_rosto = None
 
     def tirar_foto(self):
