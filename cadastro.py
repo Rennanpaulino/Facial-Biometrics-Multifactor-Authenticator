@@ -2,6 +2,7 @@ import cv2
 import face_recognition as fr
 import firebase_admin
 from firebase_admin import credentials, db
+import numpy as np
 
 # Autenticação Firebase 
 cred = credentials.Certificate('credenciais.json') 
@@ -16,6 +17,7 @@ class Pessoa:
         self.email = email
         self.password = password
         self.access_level = access_level
+        self.encode_rosto = None
 
     def tirar_foto(self):
         webcam = cv2.VideoCapture(0)
@@ -36,8 +38,12 @@ class Pessoa:
                 cv2.imshow('Cadastro', frame)
 
                 if tecla == 32:
-                    cv2.imwrite(f'imagens/{self.cpf}.jpg', img_salvar)
-                    print(f"Foto salva como: imagens/{self.cpf}.jpg")
+                    faces = fr.face_locations(img_salvar)
+                    if faces: 
+                        self.encode_rosto = fr.face_encodings(img_salvar, known_face_locations=faces)[0] 
+                        break
+                    else:
+                        print("Não foram encontrados rostos")
                 elif tecla == 27:
                     break
             else:
@@ -46,12 +52,18 @@ class Pessoa:
         cv2.destroyAllWindows()
 
     def salvar_db(self):
-        ref = db.reference(f"/CPFs/{self.cpf}")
-        dados = {
-            "Nome": self.nome,
-            "Email": self.email,
-            "Senha": self.password,
-            "Nível de Acesso": self.access_level
-        }
-        ref.set(dados)
-
+        if self.encode_rosto is not None:
+            ref = db.reference(f"/CPFs/{self.cpf}")
+            dados = {
+                "Nome": self.nome,
+                "Email": self.email,
+                "Senha": self.password,
+                "Nível de Acesso": self.access_level,
+                "Biometria": self.encode_rosto.tolist()
+            }
+            ref.set(dados)
+    
+    def getEncodeDB(self):
+        ref = db.reference(f"/CPFs/{self.cpf}/Biometria")
+        encode = ref.get()
+        return np.array(encode) if encode else None

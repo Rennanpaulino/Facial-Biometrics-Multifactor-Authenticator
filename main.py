@@ -3,8 +3,8 @@ import recogface
 
 pessoa = cadastro.Pessoa("Rennan Paulino de Sousa", "51829747878", "rennanpsousa2003@gmail.com", "test123", 3)
 
-#pessoa.tirar_foto()
+# pessoa.tirar_foto()
 
-pessoa.salvar_db()
+# pessoa.salvar_db()
 
-#a = recogface.recogface()
+a = recogface.recogface()
