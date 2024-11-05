@@ -1,9 +1,9 @@
 import cv2
 import face_recognition as fr
-import cadastro
+import pessoa
 import numpy as np
 
-pessoa = cadastro.Pessoa("Rennan Paulino de Sousa", "51829747878", "rennanpsousa2003@gmail.com", "Test12345")
+pessoa = pessoa.Pessoa("Rennan Paulino de Sousa", "51829747878", "rennanpsousa2003@gmail.com", "Test12345")
 
 # Função para converter o encode recuperado do Firebase
 def get_encoded_faces(pessoa): 
