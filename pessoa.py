@@ -5,21 +5,24 @@ from firebase_admin import credentials, db
 import numpy as np
 
 # Autenticação Firebase 
-cred = credentials.Certificate('credenciais.json') 
+cred = credentials.Certificate('C:/Users/Rennan/Desktop/Facial_Biometrics_Multifactor_Authenticator/Facial-Biometrics-Multifactor-Authenticator/credenciais/credenciais.json') 
 firebase_admin.initialize_app(cred, {
-    'databaseURL': "https://biometria-37217-default-rtdb.firebaseio.com/"
-    })
+    'databaseURL': "https://biometria-5cb35-default-rtdb.firebaseio.com/"
+})
 
 class Pessoa:
-    def __init__(self, nome, cpf, email, password):
-        self.nome = nome
-        self.cpf = cpf
-        self.email = email
-        self.password = password
+    def __init__(self):
+        self.nome = None
+        self.cpf = None
+        self.email = None
+        self.password = None
         self.access_level = 3
         self.encode_rosto = None
 
-        super().__init__(cpf,password) 
+    def setLogin(self, cpf, password) :
+        self.cpf = cpf
+        self.password = password
+        
 
     def tirar_foto(self):
         webcam = cv2.VideoCapture(0)
@@ -69,17 +72,10 @@ class Pessoa:
         ref = db.reference(f"/CPFs/{self.cpf}/Biometria")
         encode = ref.get()
         return np.array(encode) if encode else None
-    
-    def verifyCPF(self):
-        ref = db.reference(f"/CPFs/")
-        getCPF = ref.get()
-        return getCPF
-
-    def verifySenha(self):
-        ref = db.reference(f"/CPFs/{self.cpf}/")
+        
+    def verifySenha(self, cpf):
+        ref = db.reference(f"/CPFs/{cpf}/")
         dados = ref.get()
-        if dados:
-            getSenha = dados.get("Senha")
-        else:
-            print("senha inexistente")
-        return getSenha        
+        getSenha = dados.get("Senha")
+        return getSenha
+

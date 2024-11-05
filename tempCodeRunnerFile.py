@@ -4,21 +4,18 @@ from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.lang import Builder
 import pessoa
-import recogface
+#import recogface
 
 # Carregando o arquivo .kv
 Builder.load_file('login.kv')
 
 pessoa = pessoa.Pessoa()
-reconhecimento = recogface.recogface()
 class LoginScreen(Screen):
     def verify_credentials(self, instance):
         cpf = self.ids.email_input.text
-        password = self.ids.password_input.text
+        pessoa.password = self.ids.password_input.text
 
-        pessoa.setLogin(cpf, password)
-
-        if pessoa.password == pessoa.verifySenha(pessoa.cpf):
+        if pessoa.password == pessoa.verifySenha(cpf):
             self.manager.current = 'face_recognition'
         else:
             self.show_error_popup("Login ou senha incorretos")
@@ -34,7 +31,7 @@ class MainScreen(Screen):
 class FaceRecognitionScreen(Screen):
     def __init__(self, **kwargs):
         super(FaceRecognitionScreen, self).__init__(**kwargs)
-        label = Label(text="Prepare seu rosto", font_size='24sp', bold=True)
+        label = Label(text=f"Bem-Vindo, {pessoa.nome}", font_size='24sp', bold=True)
         self.add_widget(label)
         
     def go_back_to_login(self, instance):
