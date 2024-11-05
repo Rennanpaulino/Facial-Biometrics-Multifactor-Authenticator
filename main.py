@@ -28,7 +28,7 @@ class LoginScreen(Screen):
         password = self.password_input.text
 
         # Substitua pelos seus métodos de autenticação
-        if email == "user@example.com" and password == "password123":
+        if email == "ruadosbobos@num0.br" and password == "bobolandia":
             self.manager.current = 'main'
         else:
             self.show_error_popup("Login ou senha incorretos")
