@@ -19,6 +19,8 @@ class Pessoa:
         self.access_level = 3
         self.encode_rosto = None
 
+        super().__init__(cpf,password) 
+
     def tirar_foto(self):
         webcam = cv2.VideoCapture(0)
         if not webcam.isOpened():
@@ -67,3 +69,17 @@ class Pessoa:
         ref = db.reference(f"/CPFs/{self.cpf}/Biometria")
         encode = ref.get()
         return np.array(encode) if encode else None
+    
+    def verifyCPF(self):
+        ref = db.reference(f"/CPFs/")
+        getCPF = ref.get()
+        return getCPF
+
+    def verifySenha(self):
+        ref = db.reference(f"/CPFs/{self.cpf}/")
+        dados = ref.get()
+        if dados:
+            getSenha = dados.get("Senha")
+        else:
+            print("senha inexistente")
+        return getSenha        
