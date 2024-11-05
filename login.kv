@@ -1,0 +1,31 @@
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        TextInput:
+            id: email_input
+            hint_text: 'Email'
+            multiline: False
+        TextInput:
+            id: password_input
+            hint_text: 'Senha'
+            password: True
+        Button:
+            text: 'Sign In'
+            on_press: root.verify_credentials(self)
+        Button:
+            text: 'Login com Reconhecimento Facial'
+            on_press: root.go_to_face_recognition()
+
+<MainScreen>:
+    BoxLayout:
+        Label:
+            text: 'Bem-vindo à tela principal!'
+
+<FaceRecognitionScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Tela de Reconhecimento Facial'
+        Button:
+            text: 'Voltar ao Login'
+            on_press: root.go_back_to_login()
