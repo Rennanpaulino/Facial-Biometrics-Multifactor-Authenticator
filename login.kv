@@ -1,31 +1,74 @@
 <LoginScreen>:
     BoxLayout:
         orientation: 'vertical'
-        TextInput:
-            id: email_input
-            hint_text: 'Email'
-            multiline: False
-        TextInput:
-            id: password_input
-            hint_text: 'Senha'
-            password: True
-        Button:
-            text: 'Sign In'
-            on_press: root.verify_credentials(self)
-        Button:
-            text: 'Login com Reconhecimento Facial'
-            on_press: root.go_to_face_recognition()
+        padding: [40, 60]
+        spacing: 20
 
-<MainScreen>:
-    BoxLayout:
         Label:
-            text: 'Bem-vindo à tela principal!'
+            text: 'Login'
+            font_size: '32sp'
+            bold: True
+            size_hint_y: None
+            height: self.texture_size[1]
 
-<FaceRecognitionScreen>:
-    BoxLayout:
-        orientation: 'vertical'
-        Label:
-            text: 'Tela de Reconhecimento Facial'
-        Button:
-            text: 'Voltar ao Login'
-            on_press: root.go_back_to_login()
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: (None, None)
+            width: 300
+            height: 300
+            spacing: 15
+
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Email'
+                    font_size: '16sp'
+                    halign: 'left'
+                    valign: 'middle'
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                TextInput:
+                    id: email_input
+                    hint_text: 'Digite seu email'
+                    multiline: False
+                    size_hint_y: None
+                    height: 40
+                    font_size: '16sp'
+                    max_length: 30
+                    padding: [10, 10]
+                    background_normal: ''
+                    background_color: (0.9, 0.9, 0.9, 1)
+                    foreground_color: (0, 0, 0, 1)
+
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Senha'
+                    font_size: '16sp'
+                    halign: 'left'
+                    valign: 'middle'
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                TextInput:
+                    id: password_input
+                    hint_text: 'Digite sua senha'
+                    password: True
+                    multiline: False
+                    size_hint_y: None
+                    height: 40
+                    font_size: '16sp'
+                    max_length: 20
+                    padding: [10, 10]
+                    background_normal: ''
+                    background_color: (0.9, 0.9, 0.9, 1)
+                    foreground_color: (0, 0, 0, 1)
+
+            Button:
+                text: 'Sign In'
+                size_hint_y: None
+                height: 50
+                on_press: root.verify_credentials(self)
+
+           
