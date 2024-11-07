@@ -5,7 +5,7 @@ from firebase_admin import credentials, db
 import numpy as np
 
 # Autenticação Firebase 
-cred = credentials.Certificate('C:/Users/Rennan/Desktop/Facial_Biometrics_Multifactor_Authenticator/Facial-Biometrics-Multifactor-Authenticator/credenciais/credenciais.json') 
+cred = credentials.Certificate('C:/Users/Rennan/Desktop/Facial_Biometrics_Multifactor_Authenticator/Facial-Biometrics-Multifactor-Authenticator/credenciais/credenciais.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL': "https://biometria-5cb35-default-rtdb.firebaseio.com/"
 })
@@ -19,10 +19,9 @@ class Pessoa:
         self.access_level = 3
         self.encode_rosto = None
 
-    def setLogin(self, cpf, password) :
+    def setLogin(self, cpf, password):
         self.cpf = cpf
         self.password = password
-        
 
     def tirar_foto(self):
         webcam = cv2.VideoCapture(0)
@@ -44,8 +43,8 @@ class Pessoa:
 
                 if tecla == 32:
                     faces = fr.face_locations(img_salvar)
-                    if faces: 
-                        self.encode_rosto = fr.face_encodings(img_salvar, known_face_locations=faces)[0] 
+                    if faces:
+                        self.encode_rosto = fr.face_encodings(img_salvar, known_face_locations=faces)[0]
                         break
                     else:
                         print("Não foram encontrados rostos")
@@ -67,15 +66,25 @@ class Pessoa:
                 "Biometria": self.encode_rosto.tolist()
             }
             ref.set(dados)
-    
-    def getEncodeDB(self):
-        ref = db.reference(f"/CPFs/{self.cpf}/Biometria")
+
+    def getEncodeDB(self, cpf):
+        ref = db.reference(f"/CPFs/{cpf}/Biometria")
         encode = ref.get()
         return np.array(encode) if encode else None
-        
+
     def verifySenha(self, cpf):
         ref = db.reference(f"/CPFs/{cpf}/")
         dados = ref.get()
-        getSenha = dados.get("Senha")
-        return getSenha
+        if dados:
+            return dados.get("Senha")
+        else:
+            print("Senha inexistente")
 
+    def verifyLvlAcss(self, cpf):
+        ref = db.reference(f"CPFs/{cpf}/")
+        dados = ref.get()
+        if dados:
+            return dados.get("Nível de Acesso")
+        else:
+            return 3
+        
