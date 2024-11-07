@@ -1,4 +1,5 @@
-<LoginScreen>:
+<CadastroScreen>:
+<CadastroScreen>:
     BoxLayout:
         orientation: 'vertical'
         padding: [40, 60]
@@ -6,7 +7,7 @@
         background_color: (1, 1, 1, 1)
 
         Label:
-            text: 'Login'
+            text: 'Cadastro'
             font_size: '32sp'
             bold: True
             size_hint_y: None
@@ -22,6 +23,29 @@
             BoxLayout:
                 orientation: 'vertical'
                 Label:
+                    text: 'Nome'
+                    font_size: '16sp'
+                    halign: 'left'
+                    valign: 'middle'
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                TextInput:
+                    id: name_input
+                    hint_text: 'Digite seu nome completo'
+                    multiline: False
+                    size_hint_y: None
+                    height: 40
+                    font_size: '16sp'
+                    max_length: 30
+                    padding: [10, 10]
+                    background_normal: ''
+                    background_color: (0.9, 0.9, 0.9, 1)
+                    foreground_color: (0, 0, 0, 1)
+
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
                     text: 'CPF'
                     font_size: '16sp'
                     halign: 'left'
@@ -30,13 +54,36 @@
                     height: self.texture_size[1]
 
                 TextInput:
-                    id: email_input
-                    hint_text: 'Digite seu CPF'
+                    id: cpf_input
+                    hint_text: 'Digite seu CPF sem dígitos'
                     multiline: False
                     size_hint_y: None
                     height: 40
                     font_size: '16sp'
-                    max_length: 30
+                    max_length: 20
+                    padding: [10, 10]
+                    background_normal: ''
+                    background_color: (0.9, 0.9, 0.9, 1)
+                    foreground_color: (0, 0, 0, 1)
+
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'E-Mail'
+                    font_size: '16sp'
+                    halign: 'left'
+                    valign: 'middle'
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                TextInput:
+                    id: email_input
+                    hint_text: 'Digite seu e-mail'
+                    multiline: False
+                    size_hint_y: None
+                    height: 40
+                    font_size: '16sp'
+                    max_length: 20
                     padding: [10, 10]
                     background_normal: ''
                     background_color: (0.9, 0.9, 0.9, 1)
@@ -64,23 +111,15 @@
                     padding: [10, 10]
                     background_normal: ''
                     background_color: (0.9, 0.9, 0.9, 1)
-                    foreground_color: (0, 0, 0, 1)
+                    foreground_color: (0, 0, 0, 1)                    
 
             Button:
-                text: 'Sign In'
+                text: 'Cadastrar'
                 size_hint_y: None
                 height: 50
-                on_press: root.verify_credentials(self)
-
-            Button:
-                text: ' Cadastre-se'
-                size_hint_y: None
-                height: 50
-                on_press: root.cadastro(self)
-
-
-
-                
+                on_press: root.cadastrar(self)
+                on_press: root.go_back_to_login(self)
                 
 
            
+

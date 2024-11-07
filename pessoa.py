@@ -22,12 +22,20 @@ class Pessoa:
     def setLogin(self, cpf, password):
         self.cpf = cpf
         self.password = password
+    
+    def setCadastro(self, nome, cpf, email, password):
+        self.nome = nome
+        self.cpf = cpf
+        self.email = email
+        self.password = password
+        self.access_level = 3
+        self.encode_rosto = None
 
     def tirar_foto(self):
         webcam = cv2.VideoCapture(0)
         if not webcam.isOpened():
             print("Não foi possível iniciar a webcam")
-            return
+            return None
 
         while True:
             verificador, frame = webcam.read()
@@ -41,19 +49,28 @@ class Pessoa:
                     cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
                 cv2.imshow('Cadastro', frame)
 
-                if tecla == 32:
+                if tecla == 32:  # Espaço
                     faces = fr.face_locations(img_salvar)
                     if faces:
                         self.encode_rosto = fr.face_encodings(img_salvar, known_face_locations=faces)[0]
+                        print("Rosto detectado e encode gerado.")
                         break
                     else:
-                        print("Não foram encontrados rostos")
-                elif tecla == 27:
+                        print("Não foram encontrados rostos.")
+                elif tecla == 27:  # Esc
+                    print("Captura de imagem cancelada.")
                     break
             else:
-                print("Erro ao capturar imagem da webcam")
+                print("Erro ao capturar imagem da webcam")        
+        
         webcam.release()
         cv2.destroyAllWindows()
+
+        # Verificação de encode gerado
+        if self.encode_rosto is None:
+            print("Erro: Encode não gerado.")
+        return self.encode_rosto
+
 
     def salvar_db(self):
         if self.encode_rosto is not None:
@@ -63,9 +80,13 @@ class Pessoa:
                 "Email": self.email,
                 "Senha": self.password,
                 "Nível de Acesso": self.access_level,
-                "Biometria": self.encode_rosto.tolist()
+                "Biometria": self.encode_rosto.tolist()  # Converte o numpy array para lista
             }
             ref.set(dados)
+            print("Salvo no DB")
+        else:
+            print("Erro: encode_rosto é None, não foi possível salvar.")
+
 
     def getEncodeDB(self, cpf):
         ref = db.reference(f"/CPFs/{cpf}/Biometria")

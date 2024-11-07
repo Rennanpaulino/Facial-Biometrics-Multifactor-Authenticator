@@ -27,6 +27,9 @@ class LoginScreen(Screen):
     def show_error_popup(self, message):
         popup = Popup(title='Erro', content=Label(text=message), size_hint=(0.5, 0.5))
         popup.open()
+    
+    def cadastro(self, instance):
+        self.manager.current = 'cadastro'
 
 class MainScreen(Screen):
     pass
@@ -58,23 +61,49 @@ class FaceRecognitionScreen(Screen):
     def go_back_to_login(self, instance):
         self.manager.current = 'login'
 
-class LvlAcss1(Screen):
+class LvlAcss1Screen(Screen):
     def __init__(self, **kwargs):
-        super(LvlAcss1, self).__init__(**kwargs)
+        super(LvlAcss1Screen, self).__init__(**kwargs)
         label = Label(text="Welcome Level 1", font_size='24sp', bold=True)
         self.add_widget(label)
 
-class LvlAcss2(Screen):
+class LvlAcss2Screen(Screen):
     def __init__(self, **kwargs):
-        super(LvlAcss2, self).__init__(**kwargs)
+        super(LvlAcss2Screen, self).__init__(**kwargs)
         label = Label(text="Welcome Level 2", font_size='24sp', bold=True)
         self.add_widget(label)
 
-class LvlAcss3(Screen):
+class LvlAcss3Screen(Screen):
     def __init__(self, **kwargs):
-        super(LvlAcss3, self).__init__(**kwargs)
+        super(LvlAcss3Screen, self).__init__(**kwargs)
         label = Label(text="Welcome Level 3", font_size='24sp', bold=True)
         self.add_widget(label)
+
+class CadastroScreen(Screen):    
+    Builder.load_file('cadastro.kv')
+
+    def cadastrar(self, instance):
+        nome = self.ids.name_input.text
+        cpf = self.ids.cpf_input.text
+        email = self.ids.email_input.text
+        password = self.ids.password_input.text
+
+        print(f"Cadastrando: Nome={nome}, CPF={cpf}, Email={email}, Senha={password}, AccessLevel={person.access_level}")
+
+        person.setCadastro(nome, cpf, email, password)
+
+        # Chama o método de tirar foto e verifica se o encode foi gerado
+        if person.tirar_foto() is not None:
+            if person.nome and person.cpf and person.email and person.password is not None:
+                person.salvar_db()        
+                print("Cadastro realizado.")
+            else:
+                print("Preencha todos os campos")
+        else:
+            print("Falha na captura do rosto, cadastro não realizado.")
+
+    def go_back_to_login(self, instance):
+        self.manager.current = 'login'
 
 class MyApp(App):
     def build(self):
@@ -82,9 +111,10 @@ class MyApp(App):
         sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(MainScreen(name='main'))
         sm.add_widget(FaceRecognitionScreen(name='face_recognition'))
-        sm.add_widget(LvlAcss1(name='lvl1'))
-        sm.add_widget(LvlAcss2(name='lvl2'))
-        sm.add_widget(LvlAcss3(name='lvl3'))
+        sm.add_widget(LvlAcss1Screen(name='lvl1'))
+        sm.add_widget(LvlAcss2Screen(name='lvl2'))
+        sm.add_widget(LvlAcss3Screen(name='lvl3'))
+        sm.add_widget(CadastroScreen(name='cadastro'))
         return sm
 
 if __name__ == '__main__':
