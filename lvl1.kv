@@ -1,0 +1,25 @@
+<LvlAcss1Screen>:
+    BoxLayout:
+        orientation: 'horizontal'
+        padding: 20
+        spacing: 20
+        canvas.before:
+            Color:
+                rgba: (1, 1, 1, 1)  # Fundo branco
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+      # Imagem no lugar do Painel de Alertas
+        Image:
+            source: 'imagens/painel de alerta.jpg'  
+            allow_stretch: True
+            keep_ratio: True
+            size_hint: (0.3, 1)
+
+        # Imagem no lugar do Painel de Calls
+        Image:
+            source: 'imagens/Painel de calls.jpg'  
+            allow_stretch: True
+            keep_ratio: True
+            size_hint: (0.5, 1)
