@@ -14,7 +14,7 @@ reconhecimento = recogface.Recogface()
 
 class LoginScreen(Screen):
     def verify_credentials(self, instance):
-        cpf = self.ids.email_input.text
+        cpf = self.ids.cpf_input.text
         password = self.ids.password_input.text
 
         person.setLogin(cpf, password)
@@ -62,22 +62,19 @@ class FaceRecognitionScreen(Screen):
         self.manager.current = 'login'
 
 class LvlAcss1Screen(Screen):
+    Builder.load_file('lvl1.kv')
     def __init__(self, **kwargs):
         super(LvlAcss1Screen, self).__init__(**kwargs)
-        label = Label(text="Welcome Level 1", font_size='24sp', bold=True)
-        self.add_widget(label)
 
 class LvlAcss2Screen(Screen):
+    Builder.load_file('lvl2.kv')
     def __init__(self, **kwargs):
         super(LvlAcss2Screen, self).__init__(**kwargs)
-        label = Label(text="Welcome Level 2", font_size='24sp', bold=True)
-        self.add_widget(label)
 
 class LvlAcss3Screen(Screen):
+    Builder.load_file('lvl3.kv')
     def __init__(self, **kwargs):
         super(LvlAcss3Screen, self).__init__(**kwargs)
-        label = Label(text="Welcome Level 3", font_size='24sp', bold=True)
-        self.add_widget(label)
 
 class CadastroScreen(Screen):    
     Builder.load_file('cadastro.kv')
