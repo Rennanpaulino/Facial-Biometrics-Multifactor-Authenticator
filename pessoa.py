@@ -28,7 +28,7 @@ class Pessoa:
         self.cpf = cpf
         self.email = email
         self.password = password
-        self.access_level = 3
+        self.access_level = 1
         self.encode_rosto = None
 
     def tirar_foto(self):
@@ -107,5 +107,5 @@ class Pessoa:
         if dados:
             return dados.get("Nível de Acesso")
         else:
-            return 3
+            return 1
         
