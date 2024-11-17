@@ -16,7 +16,7 @@ class Pessoa:
         self.cpf = None
         self.email = None
         self.password = None
-        self.access_level = 3
+        self.access_level = 1
         self.encode_rosto = None
 
     def setLogin(self, cpf, password):

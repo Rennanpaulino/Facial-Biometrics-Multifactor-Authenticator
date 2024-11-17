@@ -49,11 +49,9 @@ class Recogface:
 
                     if any(comparacoes) and np.any(distancia < 0.4):
                         reconhecido = True
-                        print("Rosto reconhecido.")
                     else:
                         cv2.putText(frame, "Desconhecido", (faceLoc[3], faceLoc[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
                         cv2.rectangle(frame, (faceLoc[3], faceLoc[0]), (faceLoc[1], faceLoc[2]), (0, 0, 255), 2)
-                        print("Rosto não reconhecido.")
 
                 # Mostra o frame com a face detectada
                 cv2.imshow('Webcam', frame)
@@ -62,10 +60,16 @@ class Recogface:
             if cv2.waitKey(1) & 0xFF == 27:
                 break
 
+                
+        # if not reconhecido:
+        #     return False
+                
+
         # Finaliza
         webcam.release()
         cv2.destroyAllWindows()
         if not reconhecido:
             print("Reconhecimento facial não concluído.")
+            return False
         else:
             return True

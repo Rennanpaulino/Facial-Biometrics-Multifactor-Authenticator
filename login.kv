@@ -10,14 +10,12 @@
                 pos: self.pos
                 size: self.size
 
-        Label:
-            text: 'Login'
-            font_size: '32sp'
-            bold: True
-            size_hint_y: None
-            height: self.texture_size[1]
-            halign: 'center'
-            valign: 'middle'
+        Image:
+            source: 'imagens/gov.png'
+            size_hint: (1, 1)
+            allow_stretch: True
+            keep_ratio: True
+            size: self.texture_size
 
 
         BoxLayout:

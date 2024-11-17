@@ -35,17 +35,19 @@ class MainScreen(Screen):
     pass
 
 class FaceRecognitionScreen(Screen):
+    Builder.load_file('recogface.kv')
     def __init__(self, **kwargs):
         super(FaceRecognitionScreen, self).__init__(**kwargs)
-        label = Label(text="Prepare seu rosto", font_size='24sp', bold=True)
-        self.add_widget(label)
+
 
     def on_enter(self):
         cpf = person.cpf
         reconhecimento.recogface(cpf)
-        
-        if reconhecimento:
+            
+        if reconhecimento.recogface(cpf) == True:
             self.navigate_based_on_access_level()
+        else:
+            self.manager.current = 'face_recognition'
 
     def navigate_based_on_access_level(self):
         access_level = person.verifyLvlAcss(person.cpf)
@@ -54,11 +56,20 @@ class FaceRecognitionScreen(Screen):
             2: 'lvl2',
             3: 'lvl3'
         }
+        
         screen_name = screens.get(access_level, 'login')  # De volta para login se não for encontrado
         self.manager.current = screen_name
 
+
     def go_back_to_login(self, instance):
         self.manager.current = 'login'
+
+    def try_again(self, instance):
+        cpf = person.cpf
+        facial = reconhecimento.recogface(cpf)
+            
+        if facial:
+            self.navigate_based_on_access_level()
 
 class LvlAcss1Screen(Screen):
     Builder.load_file('lvl1.kv')

@@ -1,0 +1,36 @@
+<FaceRecognitionScreen>:
+    BoxLayout:
+        padding: [40, 60]
+        spacing: 20
+        canvas.before:
+            Color:
+                rgba: (1, 1, 1, 1)  # Fundo branco
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: 'vertical'
+
+        Label:
+            text: 'Prepare seu rosto'
+            color: 0,0,0,1
+            font_size: 50
+            
+        BoxLayout:
+            orientation: 'vertical'
+            height: 300
+            width: 100
+            spacing: 20
+            Button:
+                size_hint_y: None
+                height: 50
+                width: 20
+                pos_hint: {'center_x': 0.5}
+                text: 'Tentar Novamente'
+                on_press: root.try_again(self)
+            Button:
+                size_hint_y: None
+                height: 50
+                width: 20
+                pos_hint: {'center_x': 0.5}
+                text: 'Voltar para Login'
+                on_press: root.go_back_to_login(self)
