@@ -3,6 +3,7 @@ import face_recognition as fr
 import firebase_admin
 from firebase_admin import credentials, db
 import numpy as np
+import bcrypt
 
 # Autenticação Firebase 
 cred = credentials.Certificate('C:/Users/Rennan/Desktop/Facial_Biometrics_Multifactor_Authenticator/Facial-Biometrics-Multifactor-Authenticator/credenciais/credenciais.json')
@@ -30,6 +31,13 @@ class Pessoa:
         self.password = password
         self.access_level = 1
         self.encode_rosto = None
+
+    #Função que gera o hash da senha
+    def gerar_hash_senha(self):
+        #gera um valor aleatório e faz o hash
+        salt = bcrypt.gensalt()
+        hash_senha = bcrypt.hashpw(self.password.encode('utf-8'), salt)
+        return hash_senha
 
     def tirar_foto(self):
         webcam = cv2.VideoCapture(0)
@@ -75,10 +83,11 @@ class Pessoa:
     def salvar_db(self):
         if self.encode_rosto is not None:
             ref = db.reference(f"/CPFs/{self.cpf}")
+            hash_senha = self.gerar_hash_senha()
             dados = {
                 "Nome": self.nome,
                 "Email": self.email,
-                "Senha": self.password,
+                "Senha": hash_senha.decode('utf-8'),
                 "Nível de Acesso": self.access_level,
                 "Biometria": self.encode_rosto.tolist()  # Converte o numpy array para lista
             }
@@ -93,13 +102,15 @@ class Pessoa:
         encode = ref.get()
         return np.array(encode) if encode else None
 
-    def verifySenha(self, cpf):
-        ref = db.reference(f"/CPFs/{cpf}/")
-        dados = ref.get()
-        if dados:
-            return dados.get("Senha")
+    def verifySenha(self, cpf, password):
+        ref = db.reference(f"/CPFs/{cpf}/Senha")
+        hash_senha_armazenada = ref.get()
+
+        if hash_senha_armazenada and bcrypt.checkpw(password.encode('utf-8'), hash_senha_armazenada.encode('utf-8')):
+            return True
         else:
-            print("Senha inexistente")
+            return False
+
 
     def verifyLvlAcss(self, cpf):
         ref = db.reference(f"CPFs/{cpf}/")

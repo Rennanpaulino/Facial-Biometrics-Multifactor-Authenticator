@@ -19,7 +19,7 @@ class LoginScreen(Screen):
 
         person.setLogin(cpf, password)
 
-        if password == person.verifySenha(cpf):
+        if person.verifySenha(cpf, password) == True:
             self.manager.current = 'face_recognition'
         else:
             self.show_error_popup("Login ou senha incorretos")
