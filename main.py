@@ -50,12 +50,11 @@ class FaceRecognitionScreen(Screen):
     def navigate_based_on_access_level(self):
         access_level = person.verifyLvlAcss(person.cpf)
         screens = {
-            1: 'lvl1',  # Example for level 1 access
-            2: 'lvl2',  # Example for level 2 access
-            3: 'lvl3',  # Example for level 3 access
-            # Add more levels if needed
+            1: 'lvl1',  
+            2: 'lvl2',
+            3: 'lvl3'
         }
-        screen_name = screens.get(access_level, 'login')  # Default to login if level not found
+        screen_name = screens.get(access_level, 'login')  # De volta para login se não for encontrado
         self.manager.current = screen_name
 
     def go_back_to_login(self, instance):

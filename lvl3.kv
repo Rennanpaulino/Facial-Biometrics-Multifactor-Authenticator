@@ -1,39 +1,67 @@
 <LvlAcss3Screen>:
     BoxLayout:
-        orientation: 'horizontal'
+        orientation: 'vertical'
         padding: 20
         spacing: 20
         canvas.before:
             Color:
-                rgba: (1, 1, 1, 1)  # Fundo branco
+                rgba: (1,1,1,1)
             Rectangle:
                 pos: self.pos
                 size: self.size
 
-        # Imagem no lugar do Painel de Alertas
-        Image:
-            source: 'imagens/painel de alerta.jpg'  
-            allow_stretch: True
-            keep_ratio: True
-            size_hint: (0.3, 1)
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '50dp'
+            canvas.before:
+                Color:
+                    rgba: (1, 1, 1, 1)  # Fundo branco
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                color: 0,0,0,1
+                text: "Bem-Vindo, Ministro"
+                halign: 'center'
+                valign: 'middle'
+                font_size: 50
 
-        # Imagem no lugar do Painel de Calls
-        Image:
-            source: 'imagens/Painel de calls.jpg'  
-            allow_stretch: True
-            keep_ratio: True
-            size_hint: (0.5, 1)
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 20
+            spacing: 20
+            canvas.before:
+                Color:
+                    rgba: (1, 1, 1, 1)  # Fundo branco
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
 
-        # Imagem do Grafico de Pizzas
-        Image:
-            source: 'imagens/Grafico 1.jpg'  
-            allow_stretch: True
-            keep_ratio: True
-            size_hint: (0.2, 1)
-           
-        # Imagem do Grafico de Pizzas
-        Image:
-            source: 'imagens/Arvore.jpg'  
-            allow_stretch: True
-            keep_ratio: True
-            size_hint: (1.2, 1)
+            # Imagem no lugar do Painel de Alertas
+            Image:
+                source: 'imagens/painel de alerta.jpg'
+                allow_stretch: True
+                keep_ratio: True
+                size_hint: (0.3, 1)
+
+            # Imagem no lugar do Painel de Calls
+            Image:
+                source: 'imagens/Painel de calls.jpg'
+                allow_stretch: True
+                keep_ratio: True
+                size_hint: (0.5, 1)
+
+            # Imagem do Grafico de Pizzas
+            Image:
+                source: 'imagens/Grafico 1.jpg'
+                allow_stretch: True
+                keep_ratio: True
+                size_hint: (0.2, 1)
+
+            # Imagem do Grafico de Pizzas
+            Image:
+                source: 'imagens/Arvore.jpg'
+                allow_stretch: True
+                keep_ratio: True
+                size_hint: (1.2, 1)
