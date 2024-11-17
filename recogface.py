@@ -60,11 +60,6 @@ class Recogface:
             if cv2.waitKey(1) & 0xFF == 27:
                 break
 
-                
-        # if not reconhecido:
-        #     return False
-                
-
         # Finaliza
         webcam.release()
         cv2.destroyAllWindows()
