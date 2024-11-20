@@ -1,13 +1,13 @@
 {
   "type": "service_account",
-  "project_id": "biometria-5cb35",
-  "private_key_id": "1cd95df3a36074bb3db9f52b6c04fbc604b5d8d5",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDM18/X3roK6Bte\nxg8UGNDC8xK8ptkj80KgtB/pFHlebFsalqpwuGFlnbtUDfGu7ZwIcO1bkxlL4Lxf\ngHkOHn4rN4hsqWtZ6NFVW5u0+QGvUATcybcXGHYfx/ZhY5HQz5IShr212LenMhDK\ng6dslcn6Mflm3Auz7I97I+kwTXcMoouAaatmrVoRLIEL3tWWU4LiCThdHYBjEXtU\nniH+NKxt9R49B6uph0kimxjCskudZefWD5sIvEaJ5i7i/Y/QIAJSDMoOCd1v6gpv\nKtvCmigSyXrB3tfFFM2VTX5hgAoAIIiYHkbcQSsWZjYRz1ooPMpYW+Y2JBeu/m8Q\nLfLi6MuNAgMBAAECggEAA7lzzGVpZWE0KDG6h0oZN5uITm5L2ekRH89j73lhaIut\n+gqIavgV60KmK+B8sbUdG76D46Dwejj0loRFOdy+PLEWiv/nQAapPF+n8dnU2O1q\nnTdnW7qPNpjh5wI9XeTRmi0hfhDZ6/wPd+3TXuMiqD4oM6F8w/whMrhj2Rk7eNBj\nxVTm93oJBzhXaOkn6X3J8kb+zt36SOaVrvgtxqWHRyQqFWlA/ghpfYBHBvluAQdO\nUtupSXdi9TkLYh1cYUTWoL0/U8sM+iADH9I/mEJRqzBkOlrKwbZwciJXRdYPkLgh\nMvL0AbGkxU2rVCP6hb5EvflDHN5ZadbtL++fMeEL0QKBgQDuLQdnbvB2Ghp4AVxT\nwQkUd8YPFEpxcF+1zKWJL22PWXet+DIhPM7sszZq/mEFJQap4XPrFuqBDDtNaQAi\n/qR6+EhZlDc4XmMCsx59EW6+VTNOLKTqtjDGj4g2sY85H4J8m/MGFytkI+jtdsvF\ng+4qcoWPGbdtwaxJ37oN3DH6HQKBgQDcLDEqBBc60CiejSwXBqSWikk65SYY6Rco\neKhRu65elnZ6ww1G1OcDIkwy5VKWPRTHJkHjg7+Gu+q8tGRVrVxBfjWlVfPsO3ox\nkxzgfWA1KB3T6I/kUgEM7srwiBHi/TiI03pOSoWy1dI05iRcyheg8BhQPm5bk8RT\nu1D5D1PcMQKBgQCHNDKWychhErJh20vhE5ym7NMW7krQGJ2MY065EJ5eGMiyjklO\nyukgPx+uHxdOR1WADEa0dn7KoPntGKUGOI2AbP8NMvEh45rLBolRMBswmscUIo2/\n24rWvNXzTlpib/uv5wtPMsnj/+qTGrPUPO9vUzF0KYISITY/fWxtv8jzFQKBgQCK\niwhYzwArEwcsVdsTliuFSvkvpTfm3u2imuIXpEjh3j4pm4lEM/41u6RFNoZUYZUs\nh8dYOfQP/TmFiuHEA/WUhK2PH1oBIaAPh+nY3Svn5xl12daJroxYrf5ngsf2lK65\ncpF4qG4fDWtbvCHPfZ+Gtu4luFNLLt2QbsNSJbH4UQKBgQCiAV8AaR28eAzv80Bw\nIe9v7fa3IcBN5MvJgwmM4GGRskkZ+pQYhDsmzXr8R+RWHgAYjmaBDH/8MNCRV2aw\nVJWmVXa+ZpKS+DGe/vu9CFtmSejCz2D6UgZrQ/7jPHj3M1YVF5MJEk6GaALH7eWO\nAD7HO3AXbLkP2vDNBw12N6/2IA==\n-----END PRIVATE KEY-----\n",
-  "client_email": "firebase-adminsdk-ms2f2@biometria-5cb35.iam.gserviceaccount.com",
-  "client_id": "114821001121727753405",
+  "project_id": "seu_id",
+  "private_key_id": "sua_chave",
+  "private_key": "sua_chave",
+  "client_email": "seu_email_client",
+  "client_id": "sua_id_client",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ms2f2%40biometria-5cb35.iam.gserviceaccount.com",
+  "client_x509_cert_url": "sua_url",
   "universe_domain": "googleapis.com"
 }
