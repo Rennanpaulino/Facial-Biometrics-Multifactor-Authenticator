@@ -6,9 +6,9 @@ import numpy as np
 import bcrypt
 
 # Autenticação Firebase 
-cred = credentials.Certificate('C:/Users/Rennan/Desktop/Facial_Biometrics_Multifactor_Authenticator/Facial-Biometrics-Multifactor-Authenticator/credenciais/credenciais.json')
+cred = credentials.Certificate('caminho_para/credenciais.json')
 firebase_admin.initialize_app(cred, {
-    'databaseURL': "https://biometria-5cb35-default-rtdb.firebaseio.com/"
+    'databaseURL': "sua_url"
 })
 
 class Pessoa:
